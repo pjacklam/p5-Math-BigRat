@@ -1,3 +1,14 @@
+2011-02-13 v0.2602 pjacklam (1000 tests)
+  * Fix spelling errors (Peter John Acklam).
+  * Include latest versions test scripts shared with the Math::BigInt
+    distribution (Peter John Acklam).
+  * Add 00sig.t for testing the SIGNATURE file, 01load.t for explicitly
+    testing module loading and showing version information useful for
+    debugging (Peter John Acklam).
+  * Replace pod.t and pod_cov.t by 02pod.t as a generic script for testing
+    POD syntax, and 03podcov.t as a more generic script for testing POD
+    coverage (Peter John Acklam).
+
 2010-09-15 v0.26 rafl 975 tests
   * Remove obsolete test boilerplate that was once needed to test within the
     perl core (Nicholas Clark).

@@ -38,7 +38,7 @@ while (<DATA>)
         my $a = $args[1] || '';
         $try .= "\$x->binf('$a');";
       } elsif ($f eq "is_inf") {
-        $try .= "\$x->is_inf('$args[1]');"; 
+        $try .= "\$x->is_inf('$args[1]');";
       } elsif ($f eq "fone") {
         $try .= "\$x->bone('$args[1]');";
       } elsif ($f eq "fstr") {
@@ -59,7 +59,7 @@ while (<DATA>)
       # some unary ops (can't test the fxxx form, since no AUTOLOAD in BigRat)
       } elsif ($f =~ /^f(nan|sstr|neg|floor|ceil|abs)$/) {
         $try .= "\$x->b$1();";
-      # some is_xxx test function	
+      # some is_xxx test function
       } elsif ($f =~ /^is_(zero|one|pos|neg|negative|positive|odd|even|nan|int)\z/) {
         $try .= "\$x->$f();";
       } elsif ($f =~ /^(as_number|as_int)\z/){
@@ -150,7 +150,7 @@ while (<DATA>)
     }
   } # end while
 
-# check whether $class->new( Math::BigInt->new()) destroys it 
+# check whether $class->new( Math::BigInt->new()) destroys it
 # ($y == 12 in this case)
 $x = Math::BigInt->new(1200); $y = $class->new($x);
 is ($y,1200); is ($x,1200);
@@ -185,13 +185,13 @@ abc:5:NaN
 # bmodinv Expected Results from normal use
 1:5:1
 3:5:2
+3:-5:-3
 -2:5:2
 8:5033:4404
 1234567891:13:6
 -1234567891:13:7
 324958749843759385732954874325984357439658735983745:2348249874968739:1741662881064902
 ## bmodinv Error cases / useless use of function
-3:-5:NaN
 inf:5:NaN
 5:inf:NaN
 -inf:5:NaN
@@ -228,9 +228,9 @@ abc:5:5:NaN
 0:0:1:0
 8:7:5032:3840
 8:-1:5033:4404
+8:8:-5:-4
 98436739867439843769485798542749827593285729587325:43698764986460981048259837659386739857456983759328457:6943857329857295827698367:3104744730915914415259518
 # bmodpow Error cases
-8:8:-5:NaN
 8:-1:16:NaN
 inf:5:13:NaN
 5:inf:13:NaN
