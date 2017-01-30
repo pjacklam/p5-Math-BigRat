@@ -20,7 +20,7 @@ use Carp ();
 
 use Math::BigFloat '1.999718';
 
-our $VERSION = '0.2609';
+our $VERSION = '0.2610';
 
 our @ISA = qw(Math::BigFloat);
 
