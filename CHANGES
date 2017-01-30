@@ -1,6 +1,25 @@
+2015-08-28 v0.2607 pjacklam
+ CHANGES
+  * Add changes from v0.2602 to v0.2606.
+ lib/Math/BigRat.pm
+  * Increment version number. (Sync with blead.)
+ inc/Module/Install.pm
+  * Update bundled version of Module::Install from v1.08 to v1.16.
+
 2014-04-03 v0.2606 pjacklam
-  * See http://perl5.git.perl.org/perl.git/history/HEAD:/dist/Math-BigRat
-    for the recent changes.
+ BUGS
+  * Add ref to https://rt.cpan.org/Public/Dist/Display.html?Name=Math-BigRat
+ MANIFEST.SKIP
+  * Misc. updates.
+ inc/Module/Install.pm
+  * Update bundled version of Module::Install from v1.00 to v1.08.
+ lib/Math/BigRat.pm
+  * Fix spelling errors.
+  * Avoid negative zero.
+  * Various POD corrections.
+  * Add refereces to CPAN testers, CPAN RT etc.
+ t/bigrat.t
+  * Test to avoid negative zero.
 
 2011-02-13 v0.2602 pjacklam (1000 tests)
   * Fix spelling errors (Peter John Acklam).
