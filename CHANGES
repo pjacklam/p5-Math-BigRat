@@ -1,3 +1,11 @@
+2016-11-15 v0.260805 pjacklam
+
+ * Standardize on using $LIB for the variable holding the class of the backend
+   library.
+
+ * Improve bmul() by doing _gcd() twice on smaller numbers rather than once on
+   larger numbers.
+
 2016-04-25 v0.260804 pjacklam
 
  * Revert the change to the blsft() and brsft() methods, which truncated the

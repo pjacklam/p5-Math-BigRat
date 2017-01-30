@@ -17,7 +17,7 @@ all_from        'lib/Math/BigRat.pm';
 requires        'perl'          => "5.006";
 requires        'Math::BigInt'  => 1.999718;
 
-test_requires   'Test::More'    => 0.47;
+test_requires   'Test::More'    => 0.82;
 
 license         'perl';
 
