@@ -1,3 +1,8 @@
+2015-08-28 v0.2608 pjacklam
+ lib/Math/BigRat.pm
+  * Wrap long lines.
+  * Increment version number. (Sync with blead.)
+
 2015-08-28 v0.2607 pjacklam
  CHANGES
   * Add changes from v0.2602 to v0.2606.
