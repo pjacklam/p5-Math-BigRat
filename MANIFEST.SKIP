@@ -4,9 +4,11 @@
 ^Makefile\z
 ^Makefile.(old|bak)\z
 ^MANIFEST.(old|bak)\z
+^MYMETA\.(yml|json)\z
 pm_to_blib
+\.git
+\.*tmp
+.*\.patch\z
+\.sw?
 ^Math-BigRat-
 ^todos[\\\/]
-\.git/*
-\.sw?
-\.*tmp

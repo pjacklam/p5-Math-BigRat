@@ -24,7 +24,7 @@ use vars qw($VERSION @ISA $upgrade $downgrade
 
 @ISA = qw(Math::BigFloat);
 
-$VERSION = '0.2602';
+$VERSION = '0.2606';
 $VERSION = eval $VERSION;
 
 # inherit overload from Math::BigFloat, but disable the bitwise ops that don't
@@ -258,7 +258,7 @@ sub new
 
         if ($n->{sign} =~ /^[+-]$/ && $d->{sign} =~ /^[+-]$/)
 	  {
-	  # both parts are ok as integers (wierd things like ' 1e0'
+	  # both parts are ok as integers (weird things like ' 1e0'
           $self->{_n} = $MBI->_copy($n->{value});
           $self->{_d} = $MBI->_copy($d->{value});
           $self->{sign} = $n->{sign};
@@ -446,7 +446,7 @@ sub bneg
 
   return $x if $x->modify('bneg');
 
-  # for +0 dont negate (to have always normalized +0). Does nothing for 'NaN'
+  # for +0 do not negate (to have always normalized +0). Does nothing for 'NaN'
   $x->{sign} =~ tr/+-/-+/ unless ($x->{sign} eq '+' && $MBI->_is_zero($x->{_n}));
   $x;
   }
@@ -1271,7 +1271,7 @@ sub bsqrt
   $x->{_n} = _float_from_part( $x->{_n} )->bsqrt();
   $x->{_d} = _float_from_part( $x->{_d} )->bsqrt();
 
-  # XXX TODO: we probably can optimze this:
+  # XXX TODO: we probably can optimize this:
 
   # if sqrt(D) was not integer
   if ($x->{_d}->{_es} ne '+')
@@ -1428,8 +1428,8 @@ sub as_number
   return Math::BigInt->new($x->{sign}) if $x->{sign} !~ /^[+-]$/;
 
   my $u = Math::BigInt->bzero();
-  $u->{sign} = $x->{sign};
   $u->{value} = $MBI->_div( $MBI->_copy($x->{_n}), $x->{_d});	# 22/7 => 3
+  $u->bneg if $x->{sign} eq '-'; # no negative zero
   $u;
   }
 
@@ -1592,6 +1592,8 @@ sub import
 
 __END__
 
+=pod
+
 =head1 NAME
 
 Math::BigRat - Arbitrary big rational numbers
@@ -1692,7 +1694,7 @@ BigInts.
 
 Returns the object as a scalar. This will lose some data if the object
 cannot be represented by a normal Perl scalar (integer or float), so
-use L<as_int()> or L<as_float()> instead.
+use L<as_int()|/as_int()E<sol>as_number()> or L</as_float()> instead.
 
 This routine is automatically used whenever a scalar is required:
 
@@ -1925,7 +1927,7 @@ Euler's number.
 
 This method was added in v0.20 of Math::BigRat (May 2007).
 
-See also L<blog()>.
+See also C<blog()>.
 
 =head2 bnok()
 
@@ -1989,19 +1991,60 @@ This is an internal routine that turns scalars into objects.
 
 =head1 BUGS
 
-Some things are not yet implemented, or only implemented half-way:
+Please report any bugs or feature requests to
+C<bug-math-bigrat at rt.cpan.org>, or through the web interface at
+L<https://rt.cpan.org/Ticket/Create.html?Queue=Math-BigRat>
+(requires login).
+We will be notified, and then you'll automatically be notified of progress on
+your bug as I make changes.
 
-=over 2
+=head1 SUPPORT
 
-=item inf handling (partial)
+You can find documentation for this module with the perldoc command.
 
-=item NaN handling (partial)
+    perldoc Math::BigRat
 
-=item rounding (not implemented except for bceil/bfloor)
+You can also look for information at:
 
-=item $x ** $y where $y is not an integer
+=over 4
 
-=item bmod(), blog(), bmodinv() and bmodpow() (partial)
+=item * RT: CPAN's request tracker
+
+L<https://rt.cpan.org/Public/Dist/Display.html?Name=Math-BigRat>
+
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/Math-BigRat>
+
+=item * CPAN Ratings
+
+L<http://cpanratings.perl.org/dist/Math-BigRat>
+
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/Math-BigRat/>
+
+=item * CPAN Testers Matrix
+
+L<http://matrix.cpantesters.org/?dist=Math-BigRat>
+
+=item * The Bignum mailing list
+
+=over 4
+
+=item * Post to mailing list
+
+C<bignum at lists.scsys.co.uk>
+
+=item * View mailing list
+
+L<http://lists.scsys.co.uk/pipermail/bignum/>
+
+=item * Subscribe/Unsubscribe
+
+L<http://lists.scsys.co.uk/cgi-bin/mailman/listinfo/bignum>
+
+=back
 
 =back
 
@@ -2012,14 +2055,8 @@ the same terms as Perl itself.
 
 =head1 SEE ALSO
 
-L<Math::BigFloat> and L<Math::Big> as well as L<Math::BigInt::BitVect>,
-L<Math::BigInt::Pari> and  L<Math::BigInt::GMP>.
-
-See L<http://search.cpan.org/search?dist=bignum> for a way to use
-Math::BigRat.
-
-The package at L<http://search.cpan.org/search?dist=Math%3A%3ABigRat>
-may contain more documentation and examples as well as testcases.
+L<bigrat>, L<Math::BigFloat> and L<Math::BigInt> as well as the backends
+L<Math::BigInt::FastCalc>, L<Math::BigInt::GMP>, and L<Math::BigInt::Pari>.
 
 =head1 AUTHORS
 

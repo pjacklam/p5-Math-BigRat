@@ -1,3 +1,7 @@
+2014-04-03 v0.2606 pjacklam
+  * See http://perl5.git.perl.org/perl.git/history/HEAD:/dist/Math-BigRat
+    for the recent changes.
+
 2011-02-13 v0.2602 pjacklam (1000 tests)
   * Fix spelling errors (Peter John Acklam).
   * Include latest versions test scripts shared with the Math::BigInt
