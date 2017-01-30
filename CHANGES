@@ -1,37 +1,96 @@
+2016-04-22 v0.260803 pjacklam
+
+ * Add methods bnan(), binf(), bzero(), and bone(). The old code was based on
+   an undocumented behaviour where the superclass made assumptions about the
+   subclass.
+
+ * Fix tests where ok() was used incorrectly, like ok($got, $expected).
+
+ * Remove "require Carp", since we have "use Carp" in the heading.
+
+ * Completly rewrite new(). It was buggy and hard to maintain.
+
+ * Add more descriptions to tests.
+
+ * Rename blog-mbr.t to author-blog-mbr.t.
+
+ * Simplify bsqrt() and blog(). Don't assume we know the internals of
+   Math::BigFloat objects.
+
+ * Change bmodpow() and bmodinv() so they handle all input arguments.
+   Non-integers are truncated to integers.
+
+ * Change internals of bnok().
+
+ * as_float() and numify() should not make assumptions about the internals of
+   Math::BigFloat objects.
+
+ * Wrap long lines.
+
+ * Fix typo in POD ("conversation" -> "conversion").
+
+ * Make internal functions _new_from_float() and _new_from_int() redundant and
+   remove them. They make assumtions about the internals of Math::BigFloat
+   objects and Math::BigInt objects, respectively.
+
+ * Make internal function _as_float() redundant and remove it.
+
+ * Add methods band(), bior(), bxor(), and bnot().
+
 2015-12-28 v0.260802 pjacklam
-  * Fix blog(). The handling of inf and NaN was broken. It also returned
-    incorrect result in several cases, especially when both the operand and the
-    base were both integers. In some cases, the correct result was returned,
-    but the operand was not set to this value. An undefined base (indicating
-    that Euler's number e should be used) was not handled correctly.
-  * Update author information in Makefile.PL.
-  * Add tests for log() in t/bigratpm.inc as well as templates for the other
-    overloaded functions exp, sin, cos, atan2, int, abs, and sqrt.
-  * Update number of tests in t/bigratpm.t.
-  * Add test file t/blog-mbr.t.
-  * Reformat tests and add comments/descriptions to them.
-  * Accept both "Inf" and "Infinity", ignoring letter case, and letting the
-    sign be optional. This matches the current behaviour of core Perl.
-  * Internal clean-up of the copy() method.
-  * Remove all occurences of "require Carp", since we "use Carp".
-  * Reformat some of the code to make the code more readable (for me, at least)
-    and more in accordance with the guidelines in the "perlstyle" man page.
-  * Correct some errors in the comments in the code.
-  * Use "our ..." rather than "use vars ...".
-  * Rename variables so they have more descriptive names and are more in
-    accordance with the Math-BigInt distribution.
-  * Remove unused variables.
-  * Use "use lib 't'" rather than "unshift @INC, 't'".
-  * Include "use strict" and "use warnings" in all files.
+
+ * Fix blog(). The handling of inf and NaN was broken. It also returned
+   incorrect result in several cases, especially when both the operand and the
+   base were both integers. In some cases, the correct result was returned,
+   but the operand was not set to this value. An undefined base (indicating
+   that Euler's number e should be used) was not handled correctly.
+
+ * Update author information in Makefile.PL.
+
+ * Add tests for log() in t/bigratpm.inc as well as templates for the other
+   overloaded functions exp, sin, cos, atan2, int, abs, and sqrt.
+
+ * Update number of tests in t/bigratpm.t.
+
+ * Add test file t/blog-mbr.t.
+
+ * Reformat tests and add comments/descriptions to them.
+
+ * Accept both "Inf" and "Infinity", ignoring letter case, and letting the
+   sign be optional. This matches the current behaviour of core Perl.
+
+ * Internal clean-up of the copy() method.
+
+ * Remove all occurences of "require Carp", since we "use Carp".
+
+ * Reformat some of the code to make the code more readable (for me, at least)
+   and more in accordance with the guidelines in the "perlstyle" man page.
+
+ * Correct some errors in the comments in the code.
+
+ * Use "our ..." rather than "use vars ...".
+
+ * Rename variables so they have more descriptive names and are more in
+   accordance with the Math-BigInt distribution.
+
+ * Remove unused variables.
+
+ * Use "use lib 't'" rather than "unshift @INC, 't'".
+
+ * Include "use strict" and "use warnings" in all files.
 
 2015-09-14 v0.260801 pjacklam
-  * Added support for bdiv() in list context. Added corresponding tests.
-  * Changed bmod() so the result corresponds to Perl's % operator, as well as
-    the second output argument of bdiv() in list contest. Modified tests
-    correspondingly. Now the behaviour of bmod() is consistent between
-    Math::BigInt, Math::BigFloat, and Math::BigRat.
-  * Clearer POD for the bdiv() and bmod() methods.
-  * Display more information about loaded modules.
+
+ * Added support for bdiv() in list context. Added corresponding tests.
+
+ * Changed bmod() so the result corresponds to Perl's % operator, as well as
+   the second output argument of bdiv() in list contest. Modified tests
+   correspondingly. Now the behaviour of bmod() is consistent between
+   Math::BigInt, Math::BigFloat, and Math::BigRat.
+
+ * Clearer POD for the bdiv() and bmod() methods.
+
+ * Display more information about loaded modules.
 
 2015-08-28 v0.2608 pjacklam
  lib/Math/BigRat.pm
@@ -62,64 +121,64 @@
   * Test to avoid negative zero.
 
 2011-02-13 v0.2602 pjacklam (1000 tests)
-  * Fix spelling errors (Peter John Acklam).
-  * Include latest versions test scripts shared with the Math::BigInt
-    distribution (Peter John Acklam).
-  * Add 00sig.t for testing the SIGNATURE file, 01load.t for explicitly
-    testing module loading and showing version information useful for
-    debugging (Peter John Acklam).
-  * Replace pod.t and pod_cov.t by 02pod.t as a generic script for testing
-    POD syntax, and 03podcov.t as a more generic script for testing POD
-    coverage (Peter John Acklam).
+ * Fix spelling errors (Peter John Acklam).
+ * Include latest versions test scripts shared with the Math::BigInt
+   distribution (Peter John Acklam).
+ * Add 00sig.t for testing the SIGNATURE file, 01load.t for explicitly
+   testing module loading and showing version information useful for
+   debugging (Peter John Acklam).
+ * Replace pod.t and pod_cov.t by 02pod.t as a generic script for testing
+   POD syntax, and 03podcov.t as a more generic script for testing POD
+   coverage (Peter John Acklam).
 
 2010-09-15 v0.26 rafl 975 tests
-  * Remove obsolete test boilerplate that was once needed to test within the
-    perl core (Nicholas Clark).
-  * Convert tests from Test to Test::More (Nicholas Clark).
+ * Remove obsolete test boilerplate that was once needed to test within the
+   perl core (Nicholas Clark).
+ * Convert tests from Test to Test::More (Nicholas Clark).
 
 2010-09-13 v0.25 rafl 975 tests
-  * Re-upload 0.24 with a fixed SIGNATURE
+ * Re-upload 0.24 with a fixed SIGNATURE
 
 2009-09-09 v0.24 Leto 975 tests
-  * Fix [perl RT #49565: SIGNATURES]
-  * Fix [perl RT #44827: Documentation incorrect]
+ * Fix [perl RT #49565: SIGNATURES]
+ * Fix [perl RT #44827: Documentation incorrect]
 
 2009-09-08 v0.23 Leto 975 tests
-  * Fix [perl RT #67244] hex "e" misunderstood by Math::BigRat
+ * Fix [perl RT #67244] hex "e" misunderstood by Math::BigRat
 
 2008-04-06 v0.22 Tels 973 tests
-  * fix bug ##34584: hang when calling exp (Thanx Steve Wills!)
-    + broot() normalizes result
-    + bexp() works for values like '1/2' (sqrt), '1/4' (broot), etc.
-    + broot() works for values like '2/3'
-  * added as_float() - return the BigRat as rounded Math::BigFloat
+ * fix bug ##34584: hang when calling exp (Thanx Steve Wills!)
+   + broot() normalizes result
+   + bexp() works for values like '1/2' (sqrt), '1/4' (broot), etc.
+   + broot() works for values like '2/3'
+ * added as_float() - return the BigRat as rounded Math::BigFloat
 
 2007-09-16 v0.21 Tels 956 tests
-  * require Math::BigInt v1.88
-  * fix as_number() with Nan/inf (thanx zefram!)
-  * add POD stub for objectify() to make pod_cov.t happy
+ * require Math::BigInt v1.88
+ * fix as_number() with Nan/inf (thanx zefram!)
+ * add POD stub for objectify() to make pod_cov.t happy
 
 2007-06-30 v0.20 Tels 956 tests
-  * require Math::BigInt v1.87
-  * add bnok() and bexp()
+ * require Math::BigInt v1.87
+ * add bnok() and bexp()
 
 2007-04-17 v0.19 Tels 934 tests
-  * fix the check in bnorm() as it breaks under Pari
-  * require Math::BigInt v1.83
-  * exponent() makes a copy, so we can skip copy()
-  * fix the licence back to be "perl"
+ * fix the check in bnorm() as it breaks under Pari
+ * require Math::BigInt v1.83
+ * exponent() makes a copy, so we can skip copy()
+ * fix the licence back to be "perl"
 
 2007-04-09 v0.18 Tels 934 tests
-  * install_as_core() to work around Module::Install bug
-  * remove PREREQ_FATAL since the toolchain is broken
-  * require Math::BigInt v1.82
+ * install_as_core() to work around Module::Install bug
+ * remove PREREQ_FATAL since the toolchain is broken
+ * require Math::BigInt v1.82
 
 2007-02-03 v0.17 Tels 934 tests
-  * include the spelling fixes for bleadperl
-  * more typo and POD fixes
-  * include from_bin(), from_hex() and from_oct()
-  * add tests for octal and from_hex()/from_bin()
-  * bundle and use Module::Install
+ * include the spelling fixes for bleadperl
+ * more typo and POD fixes
+ * include from_bin(), from_hex() and from_oct()
+ * add tests for octal and from_hex()/from_bin()
+ * bundle and use Module::Install
 
 Older revision history:
 
