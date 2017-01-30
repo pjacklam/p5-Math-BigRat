@@ -1,3 +1,21 @@
+2016-12-03 v0.2609 pjacklam
+
+ * Use ExtUtils::MakeMaker rather than Module::Install in Makefile.PL
+
+ * Remove INSTALL file. The information is in the README file.
+
+ * Inform in the BUGS file that the file may not be up to date.
+
+ * Inform in the TODO file that the file may not be up to date.
+
+ * Update AUTHOR information in Math/BigRat.pm.
+
+ * Remove author information in LICENSE file.
+
+ * Update README file.
+
+ * Minor POD reformatting in lib/Math/BigRat.pm.
+
 2016-11-15 v0.260805 pjacklam
 
  * Standardize on using $LIB for the variable holding the class of the backend

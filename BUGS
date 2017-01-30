@@ -2,7 +2,7 @@ For an updated list of bugs, see
 
   https://rt.cpan.org/Public/Dist/Display.html?Name=Math-BigRat
 
-Known bugs:
+The following list is not up to date:
 
 * BigRat does not handle modify() yet or in a very incomplete manner
 * There are probably many... rats.
