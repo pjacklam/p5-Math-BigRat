@@ -1,3 +1,8 @@
+2016-12-13 v0.2611 pjacklam
+
+ * Add more logic to Makefile.PL regarding INSTALLDIRS (CPAN RT #119199
+   and #119225).
+
 2016-12-11 v0.2610 pjacklam
 
  * Fix Makefile.PL so that this module installs over the core version.
