@@ -1,3 +1,12 @@
+2015-09-14 v0.260801 pjacklam
+  * Added support for bdiv() in list context. Added corresponding tests.
+  * Changed bmod() so the result corresponds to Perl's % operator, as well as
+    the second output argument of bdiv() in list contest. Modified tests
+    correspondingly. Now the behaviour of bmod() is consistent between
+    Math::BigInt, Math::BigFloat, and Math::BigRat.
+  * Clearer POD for the bdiv() and bmod() methods.
+  * Display more information about loaded modules.
+
 2015-08-28 v0.2608 pjacklam
  lib/Math/BigRat.pm
   * Wrap long lines.
