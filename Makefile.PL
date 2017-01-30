@@ -1,7 +1,9 @@
+#!perl
 
 # We need at least Perl 5.6
 require 5.006;
 use strict;
+use warnings;
 
 # Load the Module::Install bundled in ./inc/
 use inc::Module::Install;
@@ -19,7 +21,7 @@ build_requires  'Test::More'    => 0.47;
 
 license         'perl';
 
-author          'Jonathan Leto <jonathan@leto.net>';
+author          'Peter John Acklam <pjacklam@gmail.com>';
 
 # install this over the version in the Perl core
 install_as_core;

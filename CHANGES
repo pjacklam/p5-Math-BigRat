@@ -1,3 +1,29 @@
+2015-12-28 v0.260802 pjacklam
+  * Fix blog(). The handling of inf and NaN was broken. It also returned
+    incorrect result in several cases, especially when both the operand and the
+    base were both integers. In some cases, the correct result was returned,
+    but the operand was not set to this value. An undefined base (indicating
+    that Euler's number e should be used) was not handled correctly.
+  * Update author information in Makefile.PL.
+  * Add tests for log() in t/bigratpm.inc as well as templates for the other
+    overloaded functions exp, sin, cos, atan2, int, abs, and sqrt.
+  * Update number of tests in t/bigratpm.t.
+  * Add test file t/blog-mbr.t.
+  * Reformat tests and add comments/descriptions to them.
+  * Accept both "Inf" and "Infinity", ignoring letter case, and letting the
+    sign be optional. This matches the current behaviour of core Perl.
+  * Internal clean-up of the copy() method.
+  * Remove all occurences of "require Carp", since we "use Carp".
+  * Reformat some of the code to make the code more readable (for me, at least)
+    and more in accordance with the guidelines in the "perlstyle" man page.
+  * Correct some errors in the comments in the code.
+  * Use "our ..." rather than "use vars ...".
+  * Rename variables so they have more descriptive names and are more in
+    accordance with the Math-BigInt distribution.
+  * Remove unused variables.
+  * Use "use lib 't'" rather than "unshift @INC, 't'".
+  * Include "use strict" and "use warnings" in all files.
+
 2015-09-14 v0.260801 pjacklam
   * Added support for bdiv() in list context. Added corresponding tests.
   * Changed bmod() so the result corresponds to Perl's % operator, as well as
