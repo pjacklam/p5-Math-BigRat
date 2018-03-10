@@ -1,5 +1,7 @@
 2017-06-16 v0.2614 pjacklam
 
+ * Import carp() and croak() from Carp.
+
  * Make tests pass when '.' is not in @INC.
 
  * Remove t/bigroot.t and t/biglog.t which didn't test Math::BigRat at all.
