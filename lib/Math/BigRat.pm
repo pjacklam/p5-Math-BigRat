@@ -1282,69 +1282,62 @@ sub bpow {
         ($class, $x, $y, @r) = objectify(2, @_);
     }
 
-    return $x if $x->{sign} =~ /^[+-]inf$/; # -inf/+inf ** x
-    return $x->bnan() if $x->{sign} eq $nan || $y->{sign} eq $nan;
-    return $x->bone(@r) if $y->is_zero();
-    return $x->round(@r) if $x->is_one() || $y->is_one();
+    # $x and/or $y is a NaN
+    return $x->bnan() if $x->is_nan() || $y->is_nan();
 
-    if ($x->{sign} eq '-' && $LIB->_is_one($x->{_n}) && $LIB->_is_one($x->{_d})) {
-        # if $x == -1 and odd/even y => +1/-1
-        return $y->is_odd() ? $x->round(@r) : $x->babs()->round(@r);
-        # my Casio FX-5500L has a bug here: -1 ** 2 is -1, but -1 * -1 is 1;
+    # $x and/or $y is a +/-Inf
+    if ($x->is_inf("-")) {
+        return $x->bzero()   if $y->is_negative();
+        return $x->bnan()    if $y->is_zero();
+        return $x            if $y->is_odd();
+        return $x->bneg();
+    } elsif ($x->is_inf("+")) {
+        return $x->bzero()   if $y->is_negative();
+        return $x->bnan()    if $y->is_zero();
+        return $x;
+    } elsif ($y->is_inf("-")) {
+        return $x->bnan()    if $x -> is_one("-");
+        return $x->binf("+") if $x > -1 && $x < 1;
+        return $x->bone()    if $x -> is_one("+");
+        return $x->bzero();
+    } elsif ($y->is_inf("+")) {
+        return $x->bnan()    if $x -> is_one("-");
+        return $x->bzero()   if $x > -1 && $x < 1;
+        return $x->bone()    if $x -> is_one("+");
+        return $x->binf("+");
     }
-    # 1 ** -y => 1 / (1 ** |y|)
-    # so do test for negative $y after above's clause
 
-    return $x->round(@r) if $x->is_zero(); # 0**y => 0 (if not y <= 0)
+    if ($x->is_zero()) {
+        return $x->binf()    if $y->is_negative();
+        return $x->bone("+") if $y->is_zero();
+        return $x;
+    } elsif ($x->is_one()) {
+        return $x->round(@r) if $y->is_odd();   # x is -1, y is odd => -1
+        return $x->babs()->round(@r);           # x is -1, y is even => 1
+    } elsif ($y->is_zero()) {
+        return $x->bone(@r);                    # x^0 and x != 0 => 1
+    } elsif ($y->is_one()) {
+        return $x->round(@r);                   # x^1 => x
+    }
 
-    # shortcut if y == 1/N (is then sqrt() respective broot())
-    if ($LIB->_is_one($y->{_n})) {
+    # we don't support complex numbers, so return NaN
+    return $x->bnan() if $x->is_negative() && !$y->is_int();
+
+    # (a/b)^-(c/d) = (b/a)^(c/d)
+    ($x->{_n}, $x->{_d}) = ($x->{_d}, $x->{_n}) if $y->is_negative();
+
+    unless ($LIB->_is_one($y->{_n})) {
+        $x->{_n} = $LIB->_pow($x->{_n}, $y->{_n});
+        $x->{_d} = $LIB->_pow($x->{_d}, $y->{_n});
+        $x->{sign} = '+' if $x->{sign} eq '-' && $LIB->_is_even($y->{_n});
+    }
+
+    unless ($LIB->_is_one($y->{_d})) {
         return $x->bsqrt(@r) if $LIB->_is_two($y->{_d}); # 1/2 => sqrt
         return $x->broot($LIB->_str($y->{_d}), @r);      # 1/N => root(N)
     }
 
-    # shortcut y/1 (and/or x/1)
-    if ($LIB->_is_one($y->{_d})) {
-        # shortcut for x/1 and y/1
-        if ($LIB->_is_one($x->{_d})) {
-            $x->{_n} = $LIB->_pow($x->{_n}, $y->{_n}); # x/1 ** y/1 => (x ** y)/1
-            if ($y->{sign} eq '-') {
-                # 0.2 ** -3 => 1/(0.2 ** 3)
-                ($x->{_n}, $x->{_d}) = ($x->{_d}, $x->{_n}); # swap
-            }
-            # correct sign; + ** + => +
-            if ($x->{sign} eq '-') {
-                # - * - => +, - * - * - => -
-                $x->{sign} = '+' if $x->{sign} eq '-' && $LIB->_is_even($y->{_n});
-            }
-            return $x->round(@r);
-        }
-
-        # x/z ** y/1
-        $x->{_n} = $LIB->_pow($x->{_n}, $y->{_n}); # 5/2 ** y/1 => 5 ** y / 2 ** y
-        $x->{_d} = $LIB->_pow($x->{_d}, $y->{_n});
-        if ($y->{sign} eq '-') {
-            # 0.2 ** -3 => 1/(0.2 ** 3)
-            ($x->{_n}, $x->{_d}) = ($x->{_d}, $x->{_n}); # swap
-        }
-        # correct sign; + ** + => +
-
-        $x->{sign} = '+' if $x->{sign} eq '-' && $LIB->_is_even($y->{_n});
-        return $x->round(@r);
-    }
-
-    #  print STDERR "# $x $y\n";
-
-    # otherwise:
-
-    #      n/d     n  ______________
-    # a/b       =  -\/  (a/b) ** d
-
-    # (a/b) ** n == (a ** n) / (b ** n)
-    $LIB->_pow($x->{_n}, $y->{_n});
-    $LIB->_pow($x->{_d}, $y->{_n});
-
-    return $x->broot($LIB->_str($y->{_d}), @r); # n/d => root(n)
+    return $x->round(@r);
 }
 
 sub blog {
