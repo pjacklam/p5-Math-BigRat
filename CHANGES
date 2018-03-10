@@ -1,5 +1,8 @@
 2017-06-16 v0.2614 pjacklam
 
+ * Fix bug in is_one(). The code $x->is_one("-") returned false when $x was -1
+   and true when $x was 1. Add tests to verify fix.
+
  * Reformat test data in t/bigratpm.inc.
 
  * Increment version number.

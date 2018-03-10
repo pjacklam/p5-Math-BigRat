@@ -1137,9 +1137,11 @@ sub is_one {
     # return true if arg (BRAT or num_str) is +1 or -1 if signis given
     my ($class, $x) = ref($_[0]) ? (undef, $_[0]) : objectify(1, @_);
 
-    my $sign = $_[2] || ''; $sign = '+' if $sign ne '-';
-    return 1
-      if ($x->{sign} eq $sign && $LIB->_is_one($x->{_n}) && $LIB->_is_one($x->{_d}));
+    croak "too many arguments for is_one()" if @_ > 2;
+    my $sign = $_[1] || '';
+    $sign = '+' if $sign ne '-';
+    return 1 if ($x->{sign} eq $sign &&
+                 $LIB->_is_one($x->{_n}) && $LIB->_is_one($x->{_d}));
     0;
 }
 

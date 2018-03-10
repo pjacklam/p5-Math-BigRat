@@ -66,8 +66,11 @@ while (<DATA>) {
     } elsif ($f =~ /^(log|exp|sin|cos|atan2|int|neg|abs|sqrt)$/) {
         $try .= " \$x = $f(\$x);";
         # some is_xxx test function
-    } elsif ($f =~ /^is_(zero|one|pos|neg|negative|positive|odd|even|nan|int)\z/) {
+    } elsif ($f =~ /^is_(zero|pos|neg|negative|positive|odd|even|nan|int)\z/) {
         $try .= " \$x->$f();";
+    } elsif ($f =~ /^is_one$/) {
+        $try .= @args == 1 ? qq| \$x->$f();|
+                           : qq| \$x->$f("$args[1]");|;
     } elsif ($f =~ /^(as_number|as_int)\z/) {
         $try .= " \$x->$1();";
     } elsif ($f eq "finc") {
@@ -802,14 +805,36 @@ NaNzero:0
 5/inf:1
 
 &is_one
-NaNone:0
+# with no sign argument
+invalid:0
+NaN:0
 +inf:0
 -inf:0
-0:0
-2:0
-1:1
--1:0
 -2:0
+-1:0
+0:0
+1:1
+-2:0
+# with sign argument "+"
+invalid:+:0
+NaN:+:0
++inf:+:0
+-inf:+:0
+-2:+:0
+-1:+:0
+0:+:0
+1:+:1
+-2:+:0
+# with sign argument "-"
+invalid:-:0
+NaN:-:0
++inf:-:0
+-inf:-:0
+-2:-:0
+-1:-:1
+0:-:0
+1:-:0
+-2:-:0
 1/3:0
 100/100:1
 0.1/0.1:1
