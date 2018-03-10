@@ -1,3 +1,7 @@
+2017-06-16 v0.2614 pjacklam
+
+ * Remove t/bigroot.t and t/biglog.t which didn't test Math::BigRat at all.
+
 2017-06-16 v0.2613 pjacklam
 
  * Fix problem with second operand being changed in multiplication (CPAN RT
