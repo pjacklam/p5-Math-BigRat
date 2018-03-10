@@ -1,5 +1,7 @@
 2017-06-16 v0.2614 pjacklam
 
+ * Increment version number.
+
  * Import carp() and croak() from Carp.
 
  * Make tests pass when '.' is not in @INC.
