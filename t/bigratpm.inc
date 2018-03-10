@@ -179,6 +179,7 @@ is($x->{_a}, undef, qq|\$x = $CLASS->new(2); \$x->bnan(); \$x->{_a}|);
 is($x->{_p}, undef, qq|\$x = $CLASS->new(2); \$x->bnan(); \$x->{_p}|);
 
 __DATA__
+
 &digit
 123:2:1
 1234:0:4
@@ -191,6 +192,7 @@ __DATA__
 1234:-4:4
 0:0:0
 0:1:0
+
 &bmodinv
 # format: number:modulus:result
 # bmodinv Data errors
@@ -211,6 +213,7 @@ inf:5:NaN
 5:inf:NaN
 -inf:5:NaN
 5:-inf:NaN
+
 &as_number
 144/7:20
 12/1:12
@@ -219,6 +222,7 @@ inf:5:NaN
 NaN:NaN
 +inf:inf
 -inf:-inf
+
 &as_int
 144/7:20
 12/1:12
@@ -227,6 +231,7 @@ NaN:NaN
 NaN:NaN
 +inf:inf
 -inf:-inf
+
 &bmodpow
 # format: number:exponent:modulus:result
 # bmodpow Data errors
@@ -249,6 +254,7 @@ abc:5:5:NaN
 8:-1:16:NaN
 inf:5:13:NaN
 5:inf:13:NaN
+
 &bmod
 NaN:1:NaN
 1:NaN:NaN
@@ -268,6 +274,7 @@ NaN:1:NaN
 -7/4:4/28:3/28
 7/4:-4/28:-3/28
 -7/4:-4/28:-1/28
+
 &fsqrt
 1:1
 0:0
@@ -279,10 +286,12 @@ NaN:NaN
 144/4:6
 25/16:5/4
 -3:NaN
+
 &flog
 NaN:NaN
 0:-inf
 -2:NaN
+
 &blog
 NaN:NaN:NaN
 0:NaN:NaN
@@ -292,10 +301,12 @@ NaN:1:NaN
 0:2:-inf
 0:-2:NaN
 3:-2:NaN
+
 &finf
 1:+:inf
 2:-:-inf
 3:abc:inf
+
 &numify
 0:0
 +1:1
@@ -307,11 +318,13 @@ NaN:1:NaN
 NaN:NaN
 +inf:inf
 -inf:-inf
+
 &fnan
 abc:NaN
 2:NaN
 -2:NaN
 0:NaN
+
 &fone
 2:+:1
 -2:-:-1
@@ -321,6 +334,7 @@ abc:NaN
 -2::1
 abc::1
 2:abc:1
+
 &fsstr
 +inf:inf
 -inf:-inf
@@ -328,6 +342,7 @@ abcfsstr:NaN
 1:1/1
 3/1:3/1
 0.1:1/10
+
 &bnorm
 1:1
 -0:0
@@ -403,6 +418,7 @@ abc:NaN
 1 / 3:1/3
 1/ 3:1/3
 1 /3:1/3
+
 &fneg
 fnegNaN:NaN
 +inf:-inf
@@ -417,6 +433,7 @@ fnegNaN:NaN
 123/7:-123/7
 -123/7:123/7
 123/-7:123/7
+
 &fabs
 fabsNaN:NaN
 +inf:inf
@@ -428,6 +445,7 @@ fabsNaN:NaN
 -123456789:123456789
 +123.456789:123456789/1000000
 -123456.789:123456789/1000
+
 &badd
 abc:abc:NaN
 abc:+0:NaN
@@ -476,6 +494,7 @@ baddNaN:+inf:NaN
 +123456789:-987654321:-864197532
 1/3:1/3:2/3
 2/3:-1/3:1/3
+
 &bsub
 abc:abc:NaN
 abc:+0:NaN
@@ -528,6 +547,7 @@ baddNaN:+inf:NaN
 -2/3:-2/3:0
 0:-123:123
 0:123:-123
+
 &bmul
 abc:abc:NaN
 abc:+0:NaN
@@ -580,6 +600,7 @@ NaNmul:-inf:NaN
 6:120:720
 10:10000:100000
 1/4:1/3:1/12
+
 &bdiv-list
 0:0:NaN,0
 0:1:0,0
@@ -591,6 +612,7 @@ NaNmul:-inf:NaN
 -9:-4:2,-1
 11/7:2/3:2,5/21
 -11/7:2/3:-3,3/7
+
 &bdiv
 $div_scale = 40; $round_mode = "even"
 abc:abc:NaN
@@ -641,11 +663,13 @@ abc:+1:abc:NaN
 1/4:1/3:3/4
 # reset scale for further tests
 $div_scale = 40
+
 &is_nan
 123:0
 abc:1
 NaN:1
 -123:0
+
 &is_inf
 +inf::1
 -inf::1
@@ -659,6 +683,7 @@ NaN::0
 -inf:+:0
 +infinity::1
 -infinity::1
+
 &is_odd
 abc:0
 0:0
@@ -673,6 +698,7 @@ abc:0
 123.45:0
 -123.45:0
 2:0
+
 &is_int
 NaNis_int:0
 0:1
@@ -687,6 +713,7 @@ NaNis_int:0
 -0.002:0
 1/3:0
 3/1:1
+
 &is_even
 abc:0
 0:1
@@ -706,6 +733,7 @@ abc:0
 120:1
 1200:1
 -1200:1
+
 &is_pos
 0:0
 1:1
@@ -714,6 +742,7 @@ abc:0
 NaN:0
 -inf:0
 +inf:1
+
 &is_positive
 0:0
 1:1
@@ -722,6 +751,7 @@ NaN:0
 NaN:0
 -inf:0
 +inf:1
+
 &is_neg
 0:0
 1:0
@@ -730,6 +760,7 @@ NaN:0
 NaN:0
 -inf:1
 +inf:0
+
 &is_negative
 0:0
 1:0
@@ -738,6 +769,7 @@ NaN:0
 NaN:0
 -inf:1
 +inf:0
+
 &parts
 0:0 1
 1:1 1
@@ -749,12 +781,14 @@ NaN:0
 NaNparts:NaN NaN
 +inf:inf inf
 -inf:-inf inf
+
 &length
 123:3
 -123:3
 0:1
 1:1
 12345678901234567890:20
+
 &is_zero
 NaNzero:0
 +inf:0
@@ -766,6 +800,7 @@ NaNzero:0
 1/3:0
 -0/3:1
 5/inf:1
+
 &is_one
 NaNone:0
 +inf:0
@@ -779,6 +814,7 @@ NaNone:0
 100/100:1
 0.1/0.1:1
 5/inf:0
+
 &ffloor
 0:0
 abc:NaN
@@ -802,6 +838,7 @@ abc:NaN
 -13/7:-2
 -14/7:-2
 -15/7:-3
+
 &fceil
 0:0
 abc:NaN
@@ -823,14 +860,17 @@ abc:NaN
 -13/7:-1
 -14/7:-2
 -15/7:-2
+
 &ffac
 NaN:NaN
 1:1
 -1:NaN
+
 &bpow
 # bpow test for overload of **
 2:2:4
 3:3:27
+
 &bacmp
 +0:-0:0
 +0:+1:-1
@@ -884,6 +924,7 @@ NaN:-inf:
 1/3:2/3:-1
 2/3:1/3:1
 2/3:2/3:0
+
 &fpow
 2/1:3/1:8
 3/1:3/1:27
@@ -897,6 +938,7 @@ NaN:-inf:
 -5/2:-4/1:16/625
 1/5:-3:125
 -1/5:-3:-125
+
 &numerator
 NaN:NaN
 inf:inf
@@ -906,6 +948,7 @@ inf:inf
 0:0
 1:1
 5/-3:-5
+
 &denominator
 NaN:NaN
 inf:1
@@ -916,18 +959,21 @@ inf:1
 -1/1:1
 -3/7:7
 4/-5:5
+
 &finc
 3/2:5/2
 -15/6:-3/2
 NaN:NaN
 -1/3:2/3
 -2/7:5/7
+
 &fdec
 15/6:3/2
 -3/2:-5/2
 1/3:-2/3
 2/7:-5/7
 NaN:NaN
+
 &log
 -1:NaN
 0:-inf
@@ -936,10 +982,17 @@ NaN:NaN
 -inf:inf
 inf:inf
 NaN:NaN
+
 &exp
+
 &sin
+
 &cos
+
 &atan2
+
 &int
+
 &abs
+
 &sqrt

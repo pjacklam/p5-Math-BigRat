@@ -1,5 +1,7 @@
 2017-06-16 v0.2614 pjacklam
 
+ * Reformat test data in t/bigratpm.inc.
+
  * Increment version number.
 
  * Import carp() and croak() from Carp.
