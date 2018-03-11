@@ -226,8 +226,7 @@ $downgrade  = undef;
 $_trap_nan = 0;                         # are NaNs ok? set w/ config()
 $_trap_inf = 0;                         # are infs ok? set w/ config()
 
-# the package we are using for our private parts, defaults to:
-# Math::BigInt->config()->{lib}
+# the math backend library
 
 my $LIB = 'Math::BigInt::Calc';
 
@@ -2071,13 +2070,13 @@ sub import {
     # LIB already loaded, so feed it our lib arguments
     Math::BigInt->import(@import);
 
-    $LIB = Math::BigFloat->config()->{lib};
+    $LIB = Math::BigFloat->config("lib");
 
     # register us with LIB to get notified of future lib changes
     Math::BigInt::_register_callback($class, sub { $LIB = $_[0]; });
 
-    # any non :constant stuff is handled by our parent, Exporter (loaded
-    # by Math::BigFloat, even if @_ is empty, to give it a chance
+    # any non :constant stuff is handled by Exporter (loaded by parent class)
+    # even if @_ is empty, to give it a chance
     $class->SUPER::import(@a);           # for subclasses
     $class->export_to_level(1, $class, @a); # need this, too
 }
@@ -2637,21 +2636,19 @@ This method was added in v0.20 of Math::BigRat (May 2007).
 
 =item config()
 
-    use Data::Dumper;
+    Math::BigRat->config("trap_nan" => 1);      # set
+    $accu = Math::BigRat->config("accuracy");   # get
 
-    print Dumper ( Math::BigRat->config() );
-    print Math::BigRat->config()->{lib}, "\n";
+Set or get configuration parameter values. Read-only parameters are marked as
+RO. Read-write parameters are marked as RW. The following parameters are
+supported.
 
-Returns a hash containing the configuration, e.g. the version number, lib
-loaded etc. The following hash keys are currently filled in with the
-appropriate information.
-
-    key             RO/RW   Description
+    Parameter       RO/RW   Description
                             Example
     ============================================================
-    lib             RO      Name of the Math library
+    lib             RO      Name of the math backend library
                             Math::BigInt::Calc
-    lib_version     RO      Version of 'lib'
+    lib_version     RO      Version of the math backend library
                             0.30
     class           RO      The class of config you just called
                             Math::BigRat
@@ -2667,16 +2664,12 @@ appropriate information.
                             undef
     round_mode      RW      Global round mode
                             even
-    div_scale       RW      Fallback accuracy for div
+    div_scale       RW      Fallback accuracy for div, sqrt etc.
                             40
-    trap_nan        RW      Trap creation of NaN (undef = no)
+    trap_nan        RW      Trap NaNs
                             undef
-    trap_inf        RW      Trap creation of +inf/-inf (undef = no)
+    trap_inf        RW      Trap +inf/-inf
                             undef
-
-By passing a reference to a hash you may set the configuration values. This
-works only for values that a marked with a C<RW> above, anything else is
-read-only.
 
 =back
 
