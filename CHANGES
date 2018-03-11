@@ -1,5 +1,7 @@
 0.2614 2017-06-16 pjacklam
 
+ * Convert t/02pod.t -> t/release-pod.t.
+
  * Reformat CHANGES to match the specification in CPAN::Changes::Spec and
    CPAN::Meta::Spec. Add test file t/release-cpan-changes.t.
 
