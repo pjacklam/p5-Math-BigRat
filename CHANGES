@@ -1,5 +1,8 @@
 2017-06-16 v0.2614 pjacklam
 
+ * Add more tests of is_inf() to catch bugs like the one that was in is_one().
+   Specifically, make sure we test is_inf() with and without a sign argument.
+
  * Use $LIB for the math backend library class.
 
  * Fix bug in bpow() (CPAN RT #124002). Add tests to verify fix.

@@ -40,8 +40,6 @@ while (<DATA>) {
     } elsif ($f eq "finf") {
         my $a = $args[1] || '';
         $try .= qq| \$x->binf("$a");|;
-    } elsif ($f eq "is_inf") {
-        $try .= qq| \$x->is_inf("$args[1]");|;
     } elsif ($f eq "fone") {
         $try .= qq| \$x->bone("$args[1]");|;
     } elsif ($f eq "fstr") {
@@ -68,7 +66,7 @@ while (<DATA>) {
         # some is_xxx test function
     } elsif ($f =~ /^is_(zero|pos|neg|negative|positive|odd|even|nan|int)\z/) {
         $try .= " \$x->$f();";
-    } elsif ($f =~ /^is_one$/) {
+    } elsif ($f =~ /^is_(one|inf)$/) {
         $try .= @args == 1 ? qq| \$x->$f();|
                            : qq| \$x->$f("$args[1]");|;
     } elsif ($f =~ /^(as_number|as_int)\z/) {
@@ -672,18 +670,32 @@ NaN:1
 -123:0
 
 &is_inf
-+inf::1
--inf::1
-abc::0
-1::0
-NaN::0
--1::0
-+inf:-:0
+# without sign argument
+abc:0
+NaN:0
++inf:1
+-inf:1
+-1:0
+0:0
+1:0
+# with sign argument "+"
+abc:+:0
+NaN:+:0
 +inf:+:1
--inf:-:1
 -inf:+:0
-+infinity::1
--infinity::1
+-1:+:0
+0:+:0
+1:+:0
+# with sign argument "-"
+abc:-:0
+NaN:-:0
++inf:-:0
+-inf:-:1
+-1:-:0
+0:-:0
+1:-:0
++infinity:1
+-infinity:1
 
 &is_odd
 abc:0
