@@ -1,5 +1,7 @@
 0.2614 2017-06-16 pjacklam
 
+ * Expand tabs to spaces and clean up whitepace.
+
  * Convert t/03podcov.t -> t/release-pod-coverage.t.
 
  * Convert t/02pod.t -> t/release-pod.t.
