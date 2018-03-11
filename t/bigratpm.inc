@@ -3,9 +3,9 @@
 use strict;
 use warnings;
 
-our ($CLASS, $try, $x, $y, $z, $f, @args, $want, $got, $setup, $CALC);
+our ($CLASS, $try, $x, $y, $z, $f, @args, $want, $got, $setup, $LIB);
 
-is($CLASS->config()->{lib}, $CALC);
+is($CLASS->config()->{lib}, $LIB);
 
 $setup = '';
 

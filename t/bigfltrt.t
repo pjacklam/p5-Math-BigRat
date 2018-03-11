@@ -9,9 +9,9 @@ use Test::More tests => 1;
 
 use Math::BigRat::Test lib => 'Calc';	# test via this Subclass
 
-our ($CLASS, $CALC);
+our ($CLASS, $LIB);
 $CLASS = "Math::BigRat::Test";
-$CALC  = "Math::BigInt::Calc";
+$LIB   = "Math::BigInt::Calc";
 
 pass();
 
