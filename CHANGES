@@ -1,5 +1,7 @@
 0.2614 2017-06-16 pjacklam
 
+ * Prefer as_int() to as_number(), since what is does is return an integer.
+
  * Expand tabs to spaces and clean up whitepace.
 
  * Convert t/03podcov.t -> t/release-pod-coverage.t.

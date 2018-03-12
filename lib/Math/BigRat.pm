@@ -205,7 +205,7 @@ BEGIN {
     # only one library loaded)
     *_e_add = \&Math::BigFloat::_e_add;
     *_e_sub = \&Math::BigFloat::_e_sub;
-    *as_int = \&as_number;
+    *as_number = \&as_int;
     *is_pos = \&is_positive;
     *is_neg = \&is_negative;
 }
@@ -1933,7 +1933,7 @@ sub numify {
     return $x->{sign} eq '-' ? 0 - $abs : 0 + $abs;
 }
 
-sub as_number {
+sub as_int {
     my ($self, $x) = ref($_[0]) ? (undef, $_[0]) : objectify(1, @_);
 
     # NaN, inf etc
@@ -2185,7 +2185,7 @@ BigInts.
 
 Returns the object as a scalar. This will lose some data if the object
 cannot be represented by a normal Perl scalar (integer or float), so
-use L<as_int()|/"as_int()/as_number()"> or L</as_float()> instead.
+use L</as_int()> or L</as_float()> instead.
 
 This routine is automatically used whenever a scalar is required:
 
@@ -2193,7 +2193,9 @@ This routine is automatically used whenever a scalar is required:
     @array = (0, 1, 2, 3);
     $y = $array[$x];                # set $y to 3
 
-=item as_int()/as_number()
+=item as_int()
+
+=item as_number()
 
     $x = Math::BigRat->new('13/7');
     print $x->as_int(), "\n";               # '1'
