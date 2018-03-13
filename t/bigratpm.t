@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 901;
+use Test::More tests => 905;
 
 use Math::BigRat lib => 'Calc';
 

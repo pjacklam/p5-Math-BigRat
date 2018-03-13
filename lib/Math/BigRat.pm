@@ -1608,16 +1608,38 @@ sub bsqrt {
     return $x if $x->{sign} eq '+inf';         # sqrt(inf) == inf
     return $x->round(@r) if $x->is_zero() || $x->is_one();
 
-    local $Math::BigFloat::upgrade = undef;
+    my $n = $x -> {_n};
+    my $d = $x -> {_d};
+
+    # Look for an exact solution. For the numerator and the denominator, take
+    # the square root and square it and see if we got the original value. If we
+    # did, for both the numerator and the denominator, we have an exact
+    # solution.
+
+    {
+        my $nsqrt = $LIB -> _sqrt($LIB -> _copy($n));
+        my $n2    = $LIB -> _mul($LIB -> _copy($nsqrt), $nsqrt);
+        if ($LIB -> _acmp($n, $n2) == 0) {
+            my $dsqrt = $LIB -> _sqrt($LIB -> _copy($d));
+            my $d2    = $LIB -> _mul($LIB -> _copy($dsqrt), $dsqrt);
+            if ($LIB -> _acmp($d, $d2) == 0) {
+                $x -> {_n} = $nsqrt;
+                $x -> {_d} = $dsqrt;
+                return $x->round(@r);
+            }
+        }
+    }
+
+    local $Math::BigFloat::upgrade   = undef;
     local $Math::BigFloat::downgrade = undef;
     local $Math::BigFloat::precision = undef;
-    local $Math::BigFloat::accuracy = undef;
-    local $Math::BigInt::upgrade = undef;
-    local $Math::BigInt::precision = undef;
-    local $Math::BigInt::accuracy = undef;
+    local $Math::BigFloat::accuracy  = undef;
+    local $Math::BigInt::upgrade     = undef;
+    local $Math::BigInt::precision   = undef;
+    local $Math::BigInt::accuracy    = undef;
 
-    my $xn = Math::BigFloat -> new($LIB -> _str($x->{_n}));
-    my $xd = Math::BigFloat -> new($LIB -> _str($x->{_d}));
+    my $xn = Math::BigFloat -> new($LIB -> _str($n));
+    my $xd = Math::BigFloat -> new($LIB -> _str($d));
 
     my $xtmp = Math::BigRat -> new($xn -> bdiv($xd) -> bsqrt() -> bsstr());
 
