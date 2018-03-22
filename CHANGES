@@ -1,5 +1,7 @@
 0.2614 2017-06-16 pjacklam
 
+ * Update TODO file.
+
  * Add test file t/release-test-version.t.
 
  * Improve bsqrt() so it returns the exact result when possible.
