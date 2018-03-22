@@ -1,5 +1,7 @@
 0.2614 2017-06-16 pjacklam
 
+ * Add test file t/release-portability.t.
+
  * Update TODO file.
 
  * Add test file t/release-test-version.t.
