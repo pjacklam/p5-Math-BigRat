@@ -1,5 +1,7 @@
 0.2614 2017-06-16 pjacklam
 
+ * Add test file t/release-test-version.t.
+
  * Improve bsqrt() so it returns the exact result when possible.
 
  * Prefer as_int() to as_number(), since what is does is return an integer.
