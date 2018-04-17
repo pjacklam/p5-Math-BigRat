@@ -65,4 +65,4 @@
 #!end included /usr/share/perl5/5.26/ExtUtils/MANIFEST.SKIP
 
 # Avoid distribution-specific stuff.
-/Math-BigRat-[0-9]
+^Math-BigRat-[0-9]

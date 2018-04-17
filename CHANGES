@@ -1,25 +1,30 @@
-0.2614 2017-06-16 pjacklam
+0.2614 2018-04-17
 
- * Add test file t/release-portability.t.
+ * Fix bug in bpow() (CPAN RT #124002). Add tests to verify fix.
 
- * Update TODO file.
-
- * Add test file t/release-test-version.t.
+ * Fix bug in is_one(). The code $x->is_one("-") returned false when $x was -1
+   and true when $x was 1. Add tests to verify fix.
 
  * Improve bsqrt() so it returns the exact result when possible.
+
+ * Fix documentation errors.
+
+ * The tests now require Test::More version 0.88 or newer.
+
+ * Add test files t/release-portability.t, t/release-test-version.t, and
+   t/release-cpan-changes.t.
+
+ * Update TODO file.
 
  * Prefer as_int() to as_number(), since what is does is return an integer.
 
  * Expand tabs to spaces and clean up whitepace.
 
- * Convert t/03podcov.t -> t/release-pod-coverage.t.
-
- * Convert t/02pod.t -> t/release-pod.t.
+ * Convert test file t/02pod.t to t/release-pod.t and t/03podcov.t to
+   t/release-pod-coverage.t.
 
  * Reformat CHANGES to match the specification in CPAN::Changes::Spec and
-   CPAN::Meta::Spec. Add test file t/release-cpan-changes.t.
-
- * Fix documentation errors.
+   CPAN::Meta::Spec.
 
  * Better testing of NaN and Inf trapping.
 
@@ -30,14 +35,7 @@
 
  * Use $LIB for the math backend library class.
 
- * Fix bug in bpow() (CPAN RT #124002). Add tests to verify fix.
-
- * Fix bug in is_one(). The code $x->is_one("-") returned false when $x was -1
-   and true when $x was 1. Add tests to verify fix.
-
  * Reformat test data in t/bigratpm.inc.
-
- * Increment version number.
 
  * Import carp() and croak() from Carp.
 
@@ -208,7 +206,7 @@
 
   * Wrap long lines.
 
-* Increment version number. (Sync with blead.)
+  * Increment version number. (Sync with blead.)
 
 0.2607 2015-08-28 pjacklam
 
