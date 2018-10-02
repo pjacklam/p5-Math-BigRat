@@ -39,7 +39,7 @@
 
  * Import carp() and croak() from Carp.
 
- * Make tests pass when '.' is not in @INC.
+ * Make tests pass when '.' is not in @INC (CPAN RT #120892).
 
  * Remove t/bigroot.t and t/biglog.t which didn't test Math::BigRat at all.
 
