@@ -2513,7 +2513,7 @@ Subtracts $y from $x and returns the result.
 In scalar context, divides $x by $y and returns the result. In list context,
 does floored division (F-division), returning an integer $q and a remainder $r
 so that $x = $q * $y + $r. The remainer (modulo) is equal to what is returned
-by C<$x->bmod($y)>.
+by C<< $x->bmod($y) >>.
 
 =item bdec()
 
