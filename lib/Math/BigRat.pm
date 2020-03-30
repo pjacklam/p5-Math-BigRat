@@ -1513,13 +1513,18 @@ sub bnok {
         ($class, $x, $y, @r) = objectify(2, @_);
     }
 
-    my $xint = Math::BigInt -> new($x -> bint() -> bsstr());
-    my $yint = Math::BigInt -> new($y -> bint() -> bsstr());
-    $xint -> bnok($yint);
+    return $x->bnan() if $x->is_nan() || $y->is_nan();
+    return $x->bnan() if (($x->is_finite() && !$x->is_int()) ||
+                          ($y->is_finite() && !$y->is_int()));
 
-    $x -> {sign} = $xint -> {sign};
-    $x -> {_n}   = $xint -> {_n};
-    $x -> {_d}   = $xint -> {_d};
+    my $xint = Math::BigInt -> new($x -> bstr());
+    my $yint = Math::BigInt -> new($y -> bstr());
+    $xint -> bnok($yint);
+    my $xrat = Math::BigRat -> new($xint);
+
+    $x -> {sign} = $xrat -> {sign};
+    $x -> {_n}   = $xrat -> {_n};
+    $x -> {_d}   = $xrat -> {_d};
 
     return $x;
 }

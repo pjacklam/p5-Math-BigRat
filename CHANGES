@@ -1,4 +1,6 @@
-0.2615
+0.2615 Not Released
+
+ * Fix bnok(). It didn't work at all.
 
  * Fix minor POD error (CPAN RT #125148).
 
