@@ -20,7 +20,7 @@ use Carp qw< carp croak >;
 
 use Math::BigFloat 1.999718;
 
-our $VERSION = '0.2614';
+our $VERSION = '0.2615';
 
 our @ISA = qw(Math::BigFloat);
 
@@ -2719,43 +2719,25 @@ You can also look for information at:
 
 =over 4
 
+=item * GitHub
+
+L<https://github.com/pjacklam/p5-Math-BigRat>
+
 =item * RT: CPAN's request tracker
 
-L<https://rt.cpan.org/Public/Dist/Display.html?Name=Math-BigRat>
+L<https://rt.cpan.org/Dist/Display.html?Name=Math-BigRat>
 
-=item * AnnoCPAN: Annotated CPAN documentation
+=item * MetaCPAN
 
-L<http://annocpan.org/dist/Math-BigRat>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/dist/Math-BigRat>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/Math-BigRat/>
+L<https://metacpan.org/release/Math-BigRat>
 
 =item * CPAN Testers Matrix
 
 L<http://matrix.cpantesters.org/?dist=Math-BigRat>
 
-=item * The Bignum mailing list
+=item * CPAN Ratings
 
-=over 4
-
-=item * Post to mailing list
-
-C<bignum at lists.scsys.co.uk>
-
-=item * View mailing list
-
-L<http://lists.scsys.co.uk/pipermail/bignum/>
-
-=item * Subscribe/Unsubscribe
-
-L<http://lists.scsys.co.uk/cgi-bin/mailman/listinfo/bignum>
-
-=back
+L<https://cpanratings.perl.org/dist/Math-BigRat>
 
 =back
 
@@ -2779,7 +2761,7 @@ Tels L<http://bloodgate.com/> 2001-2009.
 
 =item *
 
-Maintained by Peter John Acklam <pjacklam@online.no> 2011-
+Maintained by Peter John Acklam <pjacklam@gmail.com> 2011-
 
 =back
 

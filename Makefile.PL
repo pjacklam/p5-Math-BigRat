@@ -25,14 +25,15 @@ my %WriteMakefileArgs =
    # A hash of modules that are needed to run the module.
 
    'PREREQ_PM'          => {
-                            'Math::BigInt'        => 1.999718,
+                            'Math::BigInt'        => 1.999816,
+                            'Carp'                => 1.22,
                            },
 
    # A hash of modules that are needed to test the module but not run or build
    # it.
 
    'TEST_REQUIRES'      => {
-                            'Test::More'          => 0.88,
+                            'Test::More'          => 0.94,
                            },
 
    'LICENSE'            => 'perl_5',

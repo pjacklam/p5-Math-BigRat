@@ -1,10 +1,14 @@
-0.2615 Not Released
+0.2615 2021-07-10
 
  * Fix bnok(). It didn't work at all.
 
  * Fix minor POD error (CPAN RT #125148).
 
  * Better Makefile.PL.
+
+ * Update the BUGS and SUPPORT sections in the POD.
+
+ * Update README.
 
 0.2614 2018-04-17
 
