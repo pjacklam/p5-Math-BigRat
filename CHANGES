@@ -1,3 +1,7 @@
+0.2616 2021-07-12
+
+ * Improve the handling of the backend libraries.
+
 0.2615 2021-07-10
 
  * Fix bnok(). It didn't work at all.

@@ -20,7 +20,7 @@ use Carp qw< carp croak >;
 
 use Math::BigFloat 1.999718;
 
-our $VERSION = '0.2615';
+our $VERSION = '0.2616';
 
 our @ISA = qw(Math::BigFloat);
 
@@ -2048,57 +2048,57 @@ sub from_oct {
 
 sub import {
     my $class = shift;
-    my $l = scalar @_;
-    my $lib = ''; my @a;
+    my @a;
+    my $lib = '';
     my $try = 'try';
 
-    for (my $i = 0; $i < $l ; $i++) {
+    for (my $i = 0; $i <= $#_ ; $i++) {
+        croak "Error in import(): argument with index $i is undefined"
+          unless defined($_[$i]);
+
         if ($_[$i] eq ':constant') {
             # this rest causes overlord er load to step in
             overload::constant float => sub { $class->new(shift); };
         }
-        #    elsif ($_[$i] eq 'upgrade')
-        #      {
-        #     # this causes upgrading
-        #      $upgrade = $_[$i+1];             # or undef to disable
-        #      $i++;
-        #      }
+
+        #elsif ($_[$i] eq 'upgrade') {
+        #    # this causes upgrading
+        #    $upgrade = $_[$i+1];        # or undef to disable
+        #    $i++;
+        #}
+
         elsif ($_[$i] eq 'downgrade') {
             # this causes downgrading
-            $downgrade = $_[$i+1]; # or undef to disable
+            $downgrade = $_[$i+1];      # or undef to disable
             $i++;
-        } elsif ($_[$i] =~ /^(lib|try|only)\z/) {
-            $lib = $_[$i+1] || ''; # default Calc
-            $try = $1;             # lib, try or only
+        }
+
+        elsif ($_[$i] =~ /^(lib|try|only)\z/) {
+            $lib = $_[$i+1] || '';
+            $try = $1;                  # "lib", "try" or "only"
             $i++;
-        } elsif ($_[$i] eq 'with') {
+        }
+
+        elsif ($_[$i] eq 'with') {
             # this argument is no longer used
-            #$LIB = $_[$i+1] || 'Math::BigInt::Calc'; # default Math::BigInt::Calc
+            # $LIB = $_[$i+1] || 'Calc';
+            # carp "'with' is no longer supported, use 'lib', 'try', or 'only'";
             $i++;
-        } else {
+        }
+
+        else {
             push @a, $_[$i];
         }
     }
+
     require Math::BigInt;
 
-    # let use Math::BigInt lib => 'GMP'; use Math::BigRat; still have GMP
-    if ($lib ne '') {
-        my @c = split /\s*,\s*/, $lib;
-        foreach (@c) {
-            $_ =~ tr/a-zA-Z0-9://cd; # limit to sane characters
-        }
-        $lib = join(",", @c);
-    }
     my @import = ('objectify');
-    push @import, $try => $lib if $lib ne '';
+    push @import, $try, $lib if $lib ne '';
+    Math::BigInt -> import(@import);
 
-    # LIB already loaded, so feed it our lib arguments
-    Math::BigInt->import(@import);
-
-    $LIB = Math::BigFloat->config("lib");
-
-    # register us with LIB to get notified of future lib changes
-    Math::BigInt::_register_callback($class, sub { $LIB = $_[0]; });
+    # find out which one was actually loaded
+    $LIB = Math::BigInt -> config("lib");
 
     # any non :constant stuff is handled by Exporter (loaded by parent class)
     # even if @_ is empty, to give it a chance
