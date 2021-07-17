@@ -1249,7 +1249,7 @@ sub bfloor {
 }
 
 sub bint {
-    my ($class, $x, @r) = ref($_[0]) ? (ref($_[0]), $_[0]) : objectify(1, @_);
+    my ($class, $x) = ref($_[0]) ? (ref($_[0]), $_[0]) : objectify(1, @_);
 
     return $x if ($x->{sign} !~ /^[+-]$/ ||     # +/-inf or NaN
                   $LIB -> _is_one($x->{_d}));   # already an integer
@@ -1580,7 +1580,7 @@ sub bmodpow {
     my $yint = Math::BigInt -> new($y -> copy() -> bint());
     my $mint = Math::BigInt -> new($m -> copy() -> bint());
 
-    $xint -> bmodpow($y, $m, @r);
+    $xint -> bmodpow($yint, $mint, @r);
     my $xtmp = Math::BigRat -> new($xint -> bsstr());
 
     $x -> {sign} = $xtmp -> {sign};
@@ -1602,7 +1602,7 @@ sub bmodinv {
     my $xint = Math::BigInt -> new($x -> copy() -> bint());
     my $yint = Math::BigInt -> new($y -> copy() -> bint());
 
-    $xint -> bmodinv($y, @r);
+    $xint -> bmodinv($yint, @r);
     my $xtmp = Math::BigRat -> new($xint -> bsstr());
 
     $x -> {sign} = $xtmp -> {sign};
@@ -1661,7 +1661,7 @@ sub bsqrt {
 }
 
 sub blsft {
-    my ($class, $x, $y, $b, @r) = objectify(2, @_);
+    my ($class, $x, $y, $b) = objectify(2, @_);
 
     $b = 2 if !defined $b;
     $b = $class -> new($b) unless ref($b) && $b -> isa($class);
@@ -1675,7 +1675,7 @@ sub blsft {
 }
 
 sub brsft {
-    my ($class, $x, $y, $b, @r) = objectify(2, @_);
+    my ($class, $x, $y, $b) = objectify(2, @_);
 
     $b = 2 if !defined $b;
     $b = $class -> new($b) unless ref($b) && $b -> isa($class);
@@ -1874,7 +1874,7 @@ sub bacmp {
 sub beq {
     my $self    = shift;
     my $selfref = ref $self;
-    my $class   = $selfref || $self;
+    #my $class   = $selfref || $self;
 
     croak 'beq() is an instance method, not a class method' unless $selfref;
     croak 'Wrong number of arguments for beq()' unless @_ == 1;
@@ -1886,7 +1886,7 @@ sub beq {
 sub bne {
     my $self    = shift;
     my $selfref = ref $self;
-    my $class   = $selfref || $self;
+    #my $class   = $selfref || $self;
 
     croak 'bne() is an instance method, not a class method' unless $selfref;
     croak 'Wrong number of arguments for bne()' unless @_ == 1;
@@ -1898,7 +1898,7 @@ sub bne {
 sub blt {
     my $self    = shift;
     my $selfref = ref $self;
-    my $class   = $selfref || $self;
+    #my $class   = $selfref || $self;
 
     croak 'blt() is an instance method, not a class method' unless $selfref;
     croak 'Wrong number of arguments for blt()' unless @_ == 1;
@@ -1910,7 +1910,7 @@ sub blt {
 sub ble {
     my $self    = shift;
     my $selfref = ref $self;
-    my $class   = $selfref || $self;
+    #my $class   = $selfref || $self;
 
     croak 'ble() is an instance method, not a class method' unless $selfref;
     croak 'Wrong number of arguments for ble()' unless @_ == 1;
@@ -1922,7 +1922,7 @@ sub ble {
 sub bgt {
     my $self    = shift;
     my $selfref = ref $self;
-    my $class   = $selfref || $self;
+    #my $class   = $selfref || $self;
 
     croak 'bgt() is an instance method, not a class method' unless $selfref;
     croak 'Wrong number of arguments for bgt()' unless @_ == 1;
@@ -1934,7 +1934,7 @@ sub bgt {
 sub bge {
     my $self    = shift;
     my $selfref = ref $self;
-    my $class   = $selfref || $self;
+    #my $class   = $selfref || $self;
 
     croak 'bge() is an instance method, not a class method'
         unless $selfref;
