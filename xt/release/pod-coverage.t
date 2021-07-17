@@ -1,12 +1,5 @@
 #!perl
 
-BEGIN {
-    unless ($ENV{RELEASE_TESTING}) {
-        print "1..0 # SKIP these tests are for release candidate testing";
-        exit;
-    }
-}
-
 use strict;
 use warnings;
 
@@ -16,8 +9,7 @@ use Test::More;
 
 my $min_tpc = 1.08;
 eval "use Test::Pod::Coverage $min_tpc";
-plan skip_all
-  => "Test::Pod::Coverage $min_tpc required for testing POD coverage"
+plan skip_all => "Test::Pod::Coverage $min_tpc required for testing POD coverage"
   if $@;
 
 # Test::Pod::Coverage doesn't require a minimum Pod::Coverage version,
