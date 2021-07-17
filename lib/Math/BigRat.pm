@@ -366,6 +366,11 @@ sub new {
 
     # At this point, neither $n nor $d is a NaN or a zero.
 
+    # Copy them now before manipulating them.
+
+    $n = $n -> copy();
+    $d = $d -> copy();
+
     if ($d < 0) {               # make sure denominator is positive
         $n -> bneg();
         $d -> bneg();
