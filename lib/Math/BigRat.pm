@@ -20,7 +20,7 @@ use Carp qw< carp croak >;
 
 use Math::BigFloat 1.999718;
 
-our $VERSION = '0.2616';
+our $VERSION = '0.2617';
 
 our @ISA = qw(Math::BigFloat);
 
