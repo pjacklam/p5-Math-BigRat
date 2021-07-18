@@ -339,10 +339,6 @@
 
  * bundle and use Module::Install
 
-Older revision history:
-
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
 0.16 2007-01-28 Tels 926 tests
 
  * require Math::BigInt 1.78
