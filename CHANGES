@@ -1,3 +1,9 @@
+0.2617 2021-07-12
+
+ * Fix CPAN RT #132712.
+
+ * Reorganize existing test files and add more test files.
+
 0.2616 2021-07-12
 
  * Improve the handling of the backend libraries.
